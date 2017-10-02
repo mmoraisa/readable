@@ -24,3 +24,11 @@ export const fetchCategories = () => {
     return fetch(`${API}/categories`, { headers })
         .then(res => res.json())
 }
+
+export const votePost = (postId, option) => {
+    return fetch(`${API}/posts/${postId}`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({ option })
+    }).then(res => res.json())
+}

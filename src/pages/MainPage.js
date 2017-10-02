@@ -19,7 +19,7 @@ class MainPage extends Component{
         categories: PropTypes.array
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const categoryPath = this.props.match.params['categoryPath']
 
         if(!categoryPath)

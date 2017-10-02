@@ -22,3 +22,14 @@ export const fetchCategoryPosts = (categoryPath) => {
         })
     }
 }
+
+export const votePost = (postId, option) => {
+    return (dispatch) => {
+        API.votePost(postId, option).then(post => {
+            dispatch({
+                type: ActionsTypes.VOTE_POST,
+                post
+            })
+        })
+    }
+}
