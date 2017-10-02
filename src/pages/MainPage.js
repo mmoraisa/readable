@@ -1,25 +1,31 @@
 import React, { Component } from 'react'
+
 import PostList from '../components/PostList'
+import CategoryList from '../components/CategoryList'
+
 import { fetchPosts } from '../actions/postsActions'
+import { fetchCategories } from '../actions/categoriesActions'
 import { connect } from 'react-redux'
 
 class MainPage extends Component{
 
     componentDidMount() {
         this.props.fetchPosts()
+        this.props.fetchCategories()
     }
 
     render () {
-        const { posts } = this.props
-        const categoryId = this.props.match.params['categoryId']
+        const { posts, categories } = this.props
+        const categoryPath = this.props.match.params['categoryPath']
         
         let showingPosts = posts
 
-        if(categoryId)
-            showingPosts = posts.filter(post => post.category === categoryId)
+        if(categoryPath)
+            showingPosts = posts.filter(post => post.category === categoryPath)
         
         return (
             <div className="main-page">
+                <CategoryList categories={categories}/>
                 <PostList posts={showingPosts}/>
             </div>
         )
@@ -27,12 +33,14 @@ class MainPage extends Component{
 }
 
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, categories }) {
     return {
-        posts: posts
+        posts: posts,
+        categories: categories
     }
 }
 
 export default connect(mapStateToProps, {
-    fetchPosts
+    fetchPosts,
+    fetchCategories
 })(MainPage);
