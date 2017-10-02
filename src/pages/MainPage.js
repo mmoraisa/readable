@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import PostList from '../components/PostList'
 import CategoryList from '../components/CategoryList'
 
+import '../../node_modules/font-awesome/css/font-awesome.min.css'
+
 import { fetchPosts, fetchCategoryPosts } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 import { connect } from 'react-redux'
