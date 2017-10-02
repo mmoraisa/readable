@@ -6,6 +6,8 @@ function postsReducer(state = [], action) {
     switch(type){
         case ActionsTypes.FETCH_POSTS:
             return posts
+        case ActionsTypes.FETCH_CATEGORY_POSTS:
+            return posts
         default:
             return state
     }

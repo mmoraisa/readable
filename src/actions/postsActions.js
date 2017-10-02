@@ -11,3 +11,14 @@ export const fetchPosts = () => {
         })
     }
 }
+
+export const fetchCategoryPosts = (categoryPath) => {
+    return (dispatch) => {
+        API.fetchCategoryPosts(categoryPath).then(posts => {
+            dispatch({
+                type: ActionsTypes.FETCH_CATEGORY_POSTS,
+                posts
+            })
+        })
+    }
+}

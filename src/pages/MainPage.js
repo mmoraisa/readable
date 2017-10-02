@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
 
+import PropTypes from 'prop-types'
+
 import PostList from '../components/PostList'
 import CategoryList from '../components/CategoryList'
 
-import { fetchPosts } from '../actions/postsActions'
+import { fetchPosts, fetchCategoryPosts } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 import { connect } from 'react-redux'
 
-class MainPage extends Component{
+import { withRouter } from 'react-router-dom'
 
-    componentDidMount() {
-        this.props.fetchPosts()
+class MainPage extends Component{
+    static propTypes = {
+        posts: PropTypes.array,
+        categories: PropTypes.array
+    }
+
+    componentWillMount() {
+        const categoryPath = this.props.match.params['categoryPath']
+
+        if(!categoryPath)
+            this.props.fetchPosts()
+        else
+            this.props.fetchCategoryPosts(categoryPath)
+
         this.props.fetchCategories()
     }
 
     render () {
         const { posts, categories } = this.props
-        const categoryPath = this.props.match.params['categoryPath']
-        
-        let showingPosts = posts
-
-        if(categoryPath)
-            showingPosts = posts.filter(post => post.category === categoryPath)
         
         return (
             <div className="main-page">
                 <CategoryList categories={categories}/>
-                <PostList posts={showingPosts}/>
+                <PostList posts={posts}/>
             </div>
         )
     }
@@ -40,7 +48,8 @@ function mapStateToProps({ posts, categories }) {
     }
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     fetchPosts,
-    fetchCategories
-})(MainPage);
+    fetchCategories,
+    fetchCategoryPosts
+})(MainPage));

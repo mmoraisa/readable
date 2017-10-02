@@ -15,6 +15,11 @@ export const fetchPosts = () => {
         .then(res => res.json())
 }
 
+export const fetchCategoryPosts = (categoryPath) => {
+    return fetch(`${API}/${categoryPath}/posts`, { headers })
+        .then(res => res.json())
+}
+
 export const fetchCategories = () => {
     return fetch(`${API}/categories`, { headers })
         .then(res => res.json())
