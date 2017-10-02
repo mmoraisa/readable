@@ -11,8 +11,6 @@ import { fetchPosts, fetchCategoryPosts } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 import { connect } from 'react-redux'
 
-import sortBy from 'sort-by'
-
 import { withRouter } from 'react-router-dom'
 
 class MainPage extends Component{
@@ -34,14 +32,12 @@ class MainPage extends Component{
 
     render () {
         const { posts, categories } = this.props
-
-        const sortedPosts = posts.sort(sortBy('-voteScore'))
         
         return (
             <div className="main-page">
                 <h1>Readable</h1>
                 <CategoryList categories={categories}/>
-                <PostList posts={sortedPosts}/>
+                <PostList posts={posts}/>
             </div>
         )
     }
