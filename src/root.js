@@ -1,16 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
+import MainPage from './components/MainPage'
 
 const Root = () => {
     return (
         <BrowserRouter>
             <div>
-            <Route exact path='/' render={() => (
-                <div>Main Page</div>
-            )}/>
-            <Route exact path='/category/:categoryId' render={() => (
-                <div>Category Page</div>
-            )}/>
+            <Route exact path='/' component={MainPage}/>
+            <Route exact path='/category/:categoryId' component={MainPage}/>
             <Route exact path='/create/post' render={() => (
                 <div>Post Creation Page</div>
             )}/>
