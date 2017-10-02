@@ -10,14 +10,17 @@ class MainPage extends Component{
     }
 
     render () {
+        const { posts } = this.props
         const categoryId = this.props.match.params['categoryId']
+        
+        let showingPosts = posts
 
         if(categoryId)
-            console.log('todo: implement category filter')
+            showingPosts = posts.filter(post => post.category === categoryId)
         
         return (
             <div className="main-page">
-                <PostList />
+                <PostList posts={showingPosts}/>
             </div>
         )
     }

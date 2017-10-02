@@ -3,10 +3,12 @@ import Post from './Post'
 
 class PostList extends Component{
     render () {
+        const { posts } = this.props
         return (
             <div className="post-list">
-                PostList
-                <Post />
+                {posts.map(post => (
+                    <Post key={post.id} post={post}/>
+                ))}
             </div>
         )
     }
