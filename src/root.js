@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import MainPage from './components/MainPage'
-import PostPage from './components/PostPage'
+import MainPage from './pages/MainPage'
+import PostPage from './pages/PostPage'
 
 const Root = () => {
     return (
