@@ -1,0 +1,21 @@
+.categories-list{
+    margin: 10px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #186e6e;
+}
+
+.categories-list a{
+    text-decoration: none;
+    color: #fff;
+    padding: 0 10px;
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    background-color: #186e6e;
+    transition: .4s all ease;
+}
+
+.categories-list a:hover{
+    background-color: #0C4B4B;
+}

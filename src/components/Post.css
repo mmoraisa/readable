@@ -1,0 +1,10 @@
+.post{
+    background-color: #F5F5F5;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post .post-rating{
+    display: inline-block;
+    width: calc(30% - 40px);
+}
