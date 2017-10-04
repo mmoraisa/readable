@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { votePost } from '../actions/postsActions'
 import { connect } from 'react-redux'
+import history from '../history';
 
 class Post extends Component{
+
+    redirectToPost = postId => {
+        history.push(`/post/${postId}`);
+    }
+
     render () {
+        console.log(this.props.history)
         const { post, votePost } = this.props
 
         return (
-            <div className="post">
+            <div className="post" onClick={() => { this.redirectToPost(post.id) }}>
                 <header>
                     <div className="post-info">
                         <h3 className="post-title">{post.title}</h3>

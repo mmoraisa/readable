@@ -1,6 +1,9 @@
 // Posts action types
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POSTS';
+
+// Post action types
+export const FETCH_POST = 'FETCH_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';

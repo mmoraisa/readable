@@ -9,8 +9,8 @@ import '../../node_modules/font-awesome/css/font-awesome.min.css'
 
 import { fetchPosts, fetchCategoryPosts } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
-import { connect } from 'react-redux'
 
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 class MainPage extends Component{
@@ -20,14 +20,15 @@ class MainPage extends Component{
     }
 
     componentDidMount() {
-        const categoryPath = this.props.match.params['categoryPath']
+        const { match, fetchPosts, fetchCategoryPosts, fetchCategories } = this.props
+        const categoryPath = match.params['categoryPath']
 
         if(!categoryPath)
-            this.props.fetchPosts()
+            fetchPosts()
         else
-            this.props.fetchCategoryPosts(categoryPath)
+            fetchCategoryPosts(categoryPath)
 
-        this.props.fetchCategories()
+        fetchCategories()
     }
 
     render () {
@@ -55,4 +56,4 @@ export default withRouter(connect(mapStateToProps, {
     fetchPosts,
     fetchCategories,
     fetchCategoryPosts
-})(MainPage));
+})(MainPage))
