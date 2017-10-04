@@ -1,39 +1,48 @@
 import React, { Component } from 'react'
 
 import { fetchPost } from '../actions/postActions'
+import { fetchComments } from '../actions/commentsActions'
 
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import PostDetails from '../components/PostDetails'
+import CommentList from '../components/CommentList'
+
 class PostPage extends Component{
 
     componentDidMount () {
-        const { match, fetchPost } = this.props
+        const { match, fetchPost, fetchComments } = this.props
         
         const postId = match.params['postId']
 
-        if(postId)
+        if(postId){
             fetchPost(postId)
+            fetchComments(postId)
+        }
     }
     
     render () {
-        const postId = this.props.match.params['postId']
-        const isEditPage = this.props.match.url.split('/').includes('edit')
+        const { post, comments, match } = this.props
+        const isEditPage = match.url.split('/').includes('edit')
+        const readOnly = !isEditPage
 
         return (
             <div className="post-page">
-                {postId && ('Post Id: ' + postId)}
-                {isEditPage && (' - Edit Page')}
-                {!postId && ('Create Post')}
+                <div className="post-info">
+                    <PostDetails post={post} readOnly={readOnly}/>
+                    <CommentList comments={comments} />
+                </div>
             </div>
         )
     }
 }
 
-function mapStateToProps({ post }){
-    return { post }
+function mapStateToProps({ post, comments }){
+    return { post, comments }
 }
 
 export default withRouter(connect(mapStateToProps, {
-    fetchPost
+    fetchPost,
+    fetchComments
 })(PostPage))

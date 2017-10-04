@@ -1,6 +1,6 @@
 import * as ActionsTypes from '../actions/types'
 
-function postReducer(state = [], action) {
+function postReducer(state = {}, action) {
     const { post, type } = action
 
     switch(type){
