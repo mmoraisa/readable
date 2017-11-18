@@ -7,7 +7,14 @@ import sortBy from 'sort-by'
 class PostList extends Component{
 
     state = {
-        reverse: true
+        reverse: true,
+        selectedSortBy: 'voteScore'
+    }
+
+    changeSelectedSortBy = e => {
+        this.setState({
+            selectedSortBy: e.target.value            
+        })
     }
 
     revertOrder = () => {
@@ -20,11 +27,17 @@ class PostList extends Component{
 
     render () {
         const { posts } = this.props
-        const sortedPosts = posts.sort(sortBy((this.state.reverse ? '-' : '') + 'voteScore'))
+        const { selectedSortBy } = this.state
+
+        const sortedPosts = posts.sort(sortBy((this.state.reverse ? '-' : '') + selectedSortBy))
 
         return (
             <div className="post-list">
                 <div className="order-control">
+                    <select onClick={this.changeSelectedSortBy} defaultValue={selectedSortBy}>
+                        <option value="voteScore">Vote Score</option>
+                        <option value="timestamp">Creation Date</option>
+                    </select>
                     <button onClick={this.revertOrder}>
                         {this.state.reverse && (<span className="fa fa-sort-amount-asc"></span>)}
                         {!this.state.reverse && (<span className="fa fa-sort-amount-desc"></span>)}
