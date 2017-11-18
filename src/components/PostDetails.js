@@ -87,7 +87,7 @@ class PostDetails extends Component{
                 {
                     readOnly && (
                         <div>
-                            Creation Date: {timestampToDayMonthYear(post.timestamp)}
+                            Creation Date: {post.timestamp && timestampToDayMonthYear(post.timestamp)}
                         </div>
                     )
                 }
