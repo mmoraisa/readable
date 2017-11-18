@@ -1,3 +1,5 @@
+import guid from './guid.js'
+
 export const API = 'http://localhost:3001'
 let token = localStorage.token
 
@@ -43,13 +45,25 @@ export const votePost = (postId, option) => {
     }).then(res => res.json())
 }
 
-export const updatePost = (postId, title, author, body) => {
-
-    const requestBody = { title, author, body }
+export const updatePost = (postId, title, author, body, category) => {
+    const requestBody = { title, author, body, category }
 
     return fetch(`${API}/posts/${postId}`, {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify(requestBody)
+    }).then(res => res.json())
+}
+
+export const createPost = (title, author, body, category) => {
+    const requestBody = { title, author, body, category }
+
+    requestBody.id = guid();
+    requestBody.timestamp = Date.now();
+
+    return fetch(`${API}/posts`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(requestBody)
     }).then(res => res.json())
 }

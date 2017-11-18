@@ -4,6 +4,8 @@ import './PostList.css'
 
 import sortBy from 'sort-by'
 
+import history from '../history';
+
 class PostList extends Component{
 
     state = {
@@ -25,6 +27,10 @@ class PostList extends Component{
         })
     }
 
+    createPost = () => {
+        history.push('/create/post')
+    }
+
     render () {
         const { posts } = this.props
         const { selectedSortBy } = this.state
@@ -34,7 +40,8 @@ class PostList extends Component{
         return (
             <div className="post-list">
                 <div className="order-control">
-                    <select onClick={this.changeSelectedSortBy} defaultValue={selectedSortBy}>
+                <button onClick={this.createPost} className="btn btn-create"><span className="fa fa-plus"></span>Create Post</button>
+                    <select name="select-sort-by" onClick={this.changeSelectedSortBy} defaultValue={selectedSortBy}>
                         <option value="voteScore">Vote Score</option>
                         <option value="timestamp">Creation Date</option>
                     </select>

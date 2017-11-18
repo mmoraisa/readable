@@ -12,11 +12,22 @@ export const fetchPost = postId => {
     }
 }
 
-export const updatePost = (postId, title, author, body) => {
+export const updatePost = (postId,title,author,body,category) => {
     return (dispatch) => {
-        API.updatePost(postId,title,author,body).then(post => {
+        API.updatePost(postId,title,author,body,category).then(post => {
             dispatch({
                 type: ActionsTypes.UPDATE_POST,
+                post
+            })
+        })
+    }
+}
+
+export const createPost = (title,author,body,category) => {
+    return (dispatch) => {
+        API.createPost(title,author,body,category).then(post => {
+            dispatch({
+                type: ActionsTypes.CREATE_POST,
                 post
             })
         })

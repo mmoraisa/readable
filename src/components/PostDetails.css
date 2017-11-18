@@ -3,6 +3,7 @@
     border: none;
     padding: 5px 0;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .post-details button.btn span{
@@ -36,7 +37,15 @@
 .post-details button.btn-save{
     margin-top: 10px;
     padding: 5px 10px;
-    background-color: #2B6797;
+    background-color: #669696;
+    color: #fff;
+    float: right;
+}
+
+.post-details button.btn-edit{
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #669696;
     color: #fff;
     float: right;
 }

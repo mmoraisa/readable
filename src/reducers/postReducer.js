@@ -8,6 +8,8 @@ function postReducer(state = {}, action) {
             return post
         case ActionsTypes.UPDATE_POST:
             return post
+        case ActionsTypes.CREATE_POST:
+            return post
         default:
             return state
     }

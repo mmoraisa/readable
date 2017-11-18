@@ -9,7 +9,8 @@ class PostDetails extends Component{
         postId: '',
         postTitle: '',
         postAuthor: '',
-        postBody: ''
+        postBody: '',
+        postCategory: ''
     }
 
     componentWillReceiveProps = props => {
@@ -17,7 +18,8 @@ class PostDetails extends Component{
             postId: props.post.id,
             postTitle: props.post.title,
             postAuthor: props.post.author,
-            postBody: props.post.body
+            postBody: props.post.body,
+            postCategory: props.post.category
         })
     }
     
@@ -39,29 +41,57 @@ class PostDetails extends Component{
         })
     }
 
+    handleOnChangePostCategory = e => {
+        this.setState({
+            postCategory: e.target.value
+        })
+    }
+
     savePost = () => {
-        const { postId, postTitle, postAuthor, postBody } = this.state
-        this.props.updatePost(postId, postTitle, postAuthor, postBody)
+        const { postId, postTitle, postAuthor, postBody, postCategory } = this.state
+
+        if(postId === undefined){
+            this.props.createPost(postTitle, postAuthor, postBody, postCategory);
+        } else{
+            this.props.updatePost(postId, postTitle, postAuthor, postBody, postCategory)
+        }
+
+        this.redirectToPosts()
     }
 
     redirectToPosts = () => {
         history.push('/')
     }
 
+    redirectToEdit = () => {
+        const { postId } = this.state
+        history.push(`/post/${postId}/edit`)
+    }
+
     render () {
-        const { readOnly } = this.props
-        const { postTitle, postAuthor, postBody } = this.state
+        const { readOnly, categories, match } = this.props
+        const { postTitle, postAuthor, postBody, postCategory } = this.state
+
         return (
             <div className="post-details">
                 <button onClick={this.redirectToPosts} className="btn btn-back"><span className="fa fa-angle-left"></span>Back to posts</button>
+                {match.path.indexOf('edit') == -1 && (<button onClick={this.redirectToEdit} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>)}
                 <header>
-                    <input name="post-title" type="text" value={postTitle} readOnly={readOnly} onChange={this.handleOnChangePostTitle} />
-                    <input name="post-author" type="text" value={postAuthor} readOnly={readOnly} onChange={this.handleOnChangePostAuthor} />
+                    <input name="post-title" type="text" placeholder="Title" value={postTitle} readOnly={readOnly} onChange={this.handleOnChangePostTitle} />
+                    <input name="post-author" type="text" placeholder="Post Author" value={postAuthor} readOnly={readOnly} onChange={this.handleOnChangePostAuthor} />
                 </header>
                 <hr/>
-                <textarea name="post-body" value={postBody} readOnly={readOnly} onChange={this.handleOnChangePostBody} />
+                <textarea name="post-body" placeholder="Content" value={postBody} readOnly={readOnly} onChange={this.handleOnChangePostBody} />
                 {!readOnly && (
-                    <button onClick={this.savePost} className="btn btn-save"><span className="fa fa-save"></span>Save Post</button>
+                    <div>
+                        <select onChange={this.handleOnChangePostCategory} defaultValue={postCategory}>
+                            <option value="" disabled>Select a category</option>
+                            {categories.map(category => (
+                                <option value={category.path} key={category.path}>{category.name}</option>
+                            ))}
+                        </select>
+                        <button onClick={this.savePost} className="btn btn-save"><span className="fa fa-save"></span>Save Post</button>
+                    </div>
                 )}
             </div>
         )
