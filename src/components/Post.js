@@ -6,7 +6,7 @@ import history from '../history';
 class Post extends Component{
 
     redirectToPost = postId => {
-        history.push(`/post/${postId}`);
+        history.push(`/post/${postId}`)
     }
 
     render () {

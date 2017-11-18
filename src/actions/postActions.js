@@ -11,3 +11,14 @@ export const fetchPost = postId => {
         })
     }
 }
+
+export const updatePost = (postId, title, author, body) => {
+    return (dispatch) => {
+        API.updatePost(postId,title,author,body).then(post => {
+            dispatch({
+                type: ActionsTypes.UPDATE_POST,
+                post
+            })
+        })
+    }
+}

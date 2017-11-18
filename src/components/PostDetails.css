@@ -1,0 +1,42 @@
+.post-details button.btn{
+    background: none;
+    border: none;
+    padding: 5px 0;
+    border-radius: 5px;
+}
+
+.post-details button.btn span{
+    margin-right: 5px;
+}
+
+.post-details button.btn.btn-back{
+    margin-bottom: 15px;
+}
+
+.post-details input[name="post-title"]{
+    display: block;
+    font-size: 2em;
+    border: none;
+    width: 100%;
+}
+
+.post-details input[name="post-author"]{
+    display: block;
+    font-size: 1em;
+    border: none;
+    width: 100%;
+}
+
+.post-details textarea[name="post-body"]{
+    border: none;
+    width: 100%;
+    resize: vertical;
+}
+
+.post-details button.btn-save{
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #2B6797;
+    color: #fff;
+    float: right;
+}
