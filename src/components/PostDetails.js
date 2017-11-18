@@ -3,6 +3,8 @@ import './PostDetails.css'
 
 import history from '../history';
 
+import timestampToDayMonthYear from '../utils/date.js'
+
 class PostDetails extends Component{
 
     state = {
@@ -69,19 +71,26 @@ class PostDetails extends Component{
     }
 
     render () {
-        const { readOnly, categories, match } = this.props
+        const { post, readOnly, categories, match } = this.props
         const { postTitle, postAuthor, postBody, postCategory } = this.state
 
         return (
             <div className="post-details">
                 <button onClick={this.redirectToPosts} className="btn btn-back"><span className="fa fa-angle-left"></span>Back to posts</button>
-                {match.path.indexOf('edit') == -1 && (<button onClick={this.redirectToEdit} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>)}
+                {match.path.indexOf('edit') === -1 && match.path !== '/create/post' && (<button onClick={this.redirectToEdit} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>)}
                 <header>
                     <input name="post-title" type="text" placeholder="Title" value={postTitle} readOnly={readOnly} onChange={this.handleOnChangePostTitle} />
                     <input name="post-author" type="text" placeholder="Post Author" value={postAuthor} readOnly={readOnly} onChange={this.handleOnChangePostAuthor} />
                 </header>
                 <hr/>
                 <textarea name="post-body" placeholder="Content" value={postBody} readOnly={readOnly} onChange={this.handleOnChangePostBody} />
+                {
+                    readOnly && (
+                        <div>
+                            Creation Date: {timestampToDayMonthYear(post.timestamp)}
+                        </div>
+                    )
+                }
                 {!readOnly && (
                     <div>
                         <select onChange={this.handleOnChangePostCategory} defaultValue={postCategory}>
