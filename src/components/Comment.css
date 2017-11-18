@@ -1,0 +1,40 @@
+.comment{
+    background-color: rgba(218, 222, 222, 0.47);
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.comment > .author{
+    font-size: 14px;
+    font-style: italic;
+    color: #7d7d7d;
+    display: inline-block;
+}
+
+.comment > .comment-score{
+    display: inline-block;
+    width: 80px;
+    float: right;
+}
+
+.comment > .comment-score button{
+    background: none;
+    text-align: center;
+    width: 20px;
+    padding: 2px 0;
+    line-height: 15px;
+    border: 1px solid #a6bdbd;
+    border-radius: 3px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.comment > .comment-score .comment-vote-score{
+    display: inline-block;
+    width: 20px;
+    font-size: .8em;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+}

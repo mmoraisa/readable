@@ -11,3 +11,14 @@ export const fetchComments = postId => {
         })
     }
 }
+
+export const voteComment = (commentId, option) => {
+    return (dispatch) => {
+        API.voteComment(commentId, option).then(comment => {
+            dispatch({
+                type: ActionsTypes.VOTE_COMMENT,
+                comment
+            })
+        })
+    }
+}

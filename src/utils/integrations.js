@@ -45,6 +45,14 @@ export const votePost = (postId, option) => {
     }).then(res => res.json())
 }
 
+export const voteComment = (commentId, option) => {
+    return fetch(`${API}/comments/${commentId}`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({ option })
+    }).then(res => res.json())
+}
+
 export const updatePost = (postId, title, author, body, category) => {
     const requestBody = { title, author, body, category }
 
