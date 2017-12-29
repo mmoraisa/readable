@@ -12,6 +12,8 @@ function commentsReducer(state = [], action) {
                     _.voteScore = comment.voteScore
                 return _
             })
+        case ActionsTypes.CREATE_COMMENT:
+            return state.concat([comment])
         default:
             return state
     }

@@ -36,7 +36,7 @@ class PostPage extends Component{
             <div className="post-page">
                 <div className="post-info">
                     <PostDetails post={post} match={match} categories={categories} readOnly={readOnly} updatePost={updatePost} createPost={createPost}/>
-                    {!isEditPage && (<CommentList comments={comments}/>)}
+                    {!isEditPage && (<CommentList comments={comments} postId={post.id}/>)}
                 </div>
             </div>
         )

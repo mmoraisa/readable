@@ -1,3 +1,7 @@
+.comment-list:not(.add-new-post) .comment:first-of-type{
+    display: none;
+}
+
 .comment{
     background-color: rgba(218, 222, 222, 0.47);
     padding: 10px;
@@ -5,11 +9,27 @@
     margin-bottom: 10px;
 }
 
+.comment > .body textarea{
+    width: calc(100% - 5px);
+    resize: vertical;
+    background: transparent;
+    border: none;
+    height: 15px;
+}
+
 .comment > .author{
     font-size: 14px;
     font-style: italic;
     color: #7d7d7d;
     display: inline-block;
+}
+
+.comment > .author input[type="text"]{
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-style: italic;
+    color: #7d7d7d;
 }
 
 .comment > .comment-score{
@@ -37,4 +57,34 @@
     text-align: center;
     height: 20px;
     line-height: 20px;
+}
+
+.comment button.btn-save{
+    padding: 3px 6px;
+    background-color: #669696;
+    color: #fff;
+    float: right;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn-add-comment{
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #669696;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn-add-comment i,
+.comment button.btn-save i{
+    margin-right: 5px;
+}
+
+h2{
+    display: inline-block;
 }
