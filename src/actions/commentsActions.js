@@ -44,3 +44,14 @@ export const updateComment = (commentId, body) => {
         })
     }
 }
+
+export const deleteComment = commentId => {
+    return (dispatch) => {
+        API.deleteComment(commentId).then(comment => {
+            dispatch({
+                type: ActionsTypes.DELETE_COMMENT,
+                comment
+            })
+        })
+    }
+}

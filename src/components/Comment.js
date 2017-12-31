@@ -61,7 +61,7 @@ class Comment extends Component{
     }
         
     render () {
-        const { comment = { body: 'Content', author: 'Author Name', voteScore: 0 }, voteComment } = this.props
+        const { comment = { body: 'Content', author: 'Author Name', voteScore: 0 }, voteComment, callDeleteComment } = this.props
         const { edit } = this.state
 
         return (
@@ -79,7 +79,7 @@ class Comment extends Component{
                             <button onClick={() => { voteComment(comment.id,'upVote') }}><span className="fa fa-thumbs-o-up"></span></button>
                         </div>
                         <button onClick={this.enterEditMode}><span className="fa fa-edit"></span></button>
-                        <button><span className="fa fa-trash"></span></button>
+                        <button onClick={() => { callDeleteComment(comment.id) }}><span className="fa fa-trash"></span></button>
                     </div>
                 )}
                 { edit &&

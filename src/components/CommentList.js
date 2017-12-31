@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Comment from './Comment'
 
-import { createComment, updateComment } from '../actions/commentsActions'
+import { createComment, updateComment, deleteComment } from '../actions/commentsActions'
 import { connect } from 'react-redux'
 
 import sortBy from 'sort-by'
@@ -34,6 +34,11 @@ class CommentList extends Component{
         updateComment(commentId,commentBody)
     }
 
+    callDeleteComment = commentId => {
+        const { deleteComment } = this.props
+        deleteComment(commentId)
+    }
+
     render () {
         const { comments } = this.props
         const { addingNewComment } = this.state
@@ -47,7 +52,7 @@ class CommentList extends Component{
                     addingNewComment && (<Comment callCreateComment={this.callCreateComment} endNewComment={this.endNewComment} edit={true}/>)
                 }
                 {sortedComments.map(comment => (
-                    <Comment callSaveComment={this.callSaveComment} key={comment.id} comment={comment} />
+                    <Comment callSaveComment={this.callSaveComment} callDeleteComment={this.callDeleteComment} key={comment.id} comment={comment} />
                 ))}
             </div>
         )
@@ -56,5 +61,6 @@ class CommentList extends Component{
 
 export default connect(function(){ return {} }, {
     createComment,
-    updateComment
+    updateComment,
+    deleteComment
 })(CommentList);
