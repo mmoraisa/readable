@@ -33,3 +33,14 @@ export const createComment = (author, body, postId) => {
         })
     }
 }
+
+export const updateComment = (commentId, body) => {
+    return (dispatch) => {
+        API.updateComment(commentId, body).then(comment => {
+            dispatch({
+                type: ActionsTypes.UPDATE_COMMENT,
+                comment
+            })
+        })
+    }
+}

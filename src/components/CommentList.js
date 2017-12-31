@@ -1,15 +1,27 @@
 import React, { Component } from 'react'
 import Comment from './Comment'
 
-import { createComment } from '../actions/commentsActions'
+import { createComment, updateComment } from '../actions/commentsActions'
 import { connect } from 'react-redux'
 
 import sortBy from 'sort-by'
 
 class CommentList extends Component{
 
+    state = {
+        addingNewComment: false
+    }
+
     addNewComment = () => {
-        document.querySelector('.comment-list').classList.add('add-new-post');
+        this.setState({
+            addingNewComment: true 
+        })
+    }
+
+    endNewComment = () => {
+        this.setState({
+            addingNewComment: false
+        })
     }
 
     callCreateComment = (author,body) => {
@@ -17,19 +29,23 @@ class CommentList extends Component{
         createComment(author,body,postId)
     }
 
-    callSaveComment = comment => {
-        // update a comment
+    callSaveComment = (commentId, commentBody) => {
+        const { updateComment } = this.props
+        updateComment(commentId,commentBody)
     }
 
     render () {
         const { comments } = this.props
+        const { addingNewComment } = this.state
         const sortedComments = comments.sort(sortBy('-voteScore'))
 
         return (
             <div className="comment-list">
                 <h2>Comments ({comments.length})</h2>
                 <button onClick={this.addNewComment} className="btn btn-add-comment"><i className="fa fa-plus"></i>Add new comment</button>
-                <Comment callCreateComment={this.callCreateComment}/>
+                {
+                    addingNewComment && (<Comment callCreateComment={this.callCreateComment} endNewComment={this.endNewComment} edit={true}/>)
+                }
                 {sortedComments.map(comment => (
                     <Comment callSaveComment={this.callSaveComment} key={comment.id} comment={comment} />
                 ))}
@@ -39,5 +55,6 @@ class CommentList extends Component{
 }
 
 export default connect(function(){ return {} }, {
-    createComment
+    createComment,
+    updateComment
 })(CommentList);

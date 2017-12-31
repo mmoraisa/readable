@@ -7,7 +7,8 @@ import './Comment.css'
 
 const initialState = {
     commentAuthor: '',
-    commentBody: ''
+    commentBody: '',
+    edit: false
 }
 
 class Comment extends Component{
@@ -15,17 +16,30 @@ class Comment extends Component{
     state = initialState
 
     handleSave = () => {
-        const { comment, callCreateComment, callSaveComment } = this.props
         const { commentAuthor, commentBody } = this.state
+        const { comment, endNewComment, callCreateComment, callSaveComment } = this.props
 
-        if(comment){
-            // save
-            debugger;
+        if(commentBody.length > 0){
+            if(comment === undefined){
+                if(commentAuthor.length > 0){
+                    callCreateComment(commentAuthor,commentBody)
+                    endNewComment()
+                }
+            }
+            else{
+                callSaveComment(comment.id,commentBody)
+            }
         }
-        else{
-            callCreateComment(commentAuthor,commentBody)
-            this.setState(initialState)
-        }
+
+        this.setState(initialState)
+    }
+
+    componentDidMount = () => {
+        const { edit } = this.props
+
+        this.setState({
+            edit
+        })
     }
     
     handleOnChangeCommentAuthor = e => {
@@ -39,23 +53,36 @@ class Comment extends Component{
             commentBody: e.target.value
         })
     }
+
+    enterEditMode = () => {
+        this.setState({
+            edit: true
+        })
+    }
         
     render () {
         const { comment = { body: 'Content', author: 'Author Name', voteScore: 0 }, voteComment } = this.props
+        const { edit } = this.state
 
         return (
             <div className="comment">
                 <div className="body">
-                    <textarea defaultValue={comment.body} onChange={this.handleOnChangeCommentBody}></textarea>
+                    <textarea defaultValue={comment.body} onChange={this.handleOnChangeCommentBody} disabled={!edit}></textarea>
                 </div>
-                <div className="author">by <input type="text" defaultValue={comment.author} onChange={this.handleOnChangeCommentAuthor}/></div>
+                <div className="author">by <input type="text" defaultValue={comment.author} onChange={this.handleOnChangeCommentAuthor} disabled={!edit}/></div>
                 { comment.id && 
-                (<div className="comment-score">
-                    <button onClick={() => { voteComment(comment.id,'downVote') }}><span className="fa fa-thumbs-o-down"></span></button>
-                    <span className="comment-vote-score">{comment.voteScore}</span>
-                    <button onClick={() => { voteComment(comment.id,'upVote') }}><span className="fa fa-thumbs-o-up"></span></button>
-                </div>)}
-                { !comment.id &&
+                (
+                    <div className="controls">
+                        <div className="comment-score">
+                            <button onClick={() => { voteComment(comment.id,'downVote') }}><span className="fa fa-thumbs-o-down"></span></button>
+                            <span className="comment-vote-score">{comment.voteScore}</span>
+                            <button onClick={() => { voteComment(comment.id,'upVote') }}><span className="fa fa-thumbs-o-up"></span></button>
+                        </div>
+                        <button onClick={this.enterEditMode}><span className="fa fa-edit"></span></button>
+                        <button><span className="fa fa-trash"></span></button>
+                    </div>
+                )}
+                { edit &&
                 (
                     <button onClick={this.handleSave} className="btn btn-save"><i className="fa fa-save"></i>Save</button>
                 )}

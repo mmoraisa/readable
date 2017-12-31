@@ -79,8 +79,8 @@ export const createPost = (title, author, body, category) => {
 export const createComment = (author, body, parentId) => {
     const requestBody = { author, body, parentId }
 
-    requestBody.id = guid();
-    requestBody.timestamp = Date.now();
+    requestBody.id = guid()
+    requestBody.timestamp = Date.now()
     
     return fetch(`${API}/comments`, {
         method: 'POST',
@@ -93,5 +93,17 @@ export const deletePost = postId => {
     return fetch(`${API}/posts/${postId}`, {
         method: 'DELETE',
         headers: headers
+    }).then(res => res.json())
+}
+
+export const updateComment = (id, body) => {
+    const requestBody = { body }
+
+    requestBody.timestamp = Date.now()
+
+    return fetch(`${API}/comments/${id}`, {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(requestBody)
     }).then(res => res.json())
 }

@@ -14,6 +14,8 @@ function commentsReducer(state = [], action) {
             })
         case ActionsTypes.CREATE_COMMENT:
             return state.concat([comment])
+        case ActionsTypes.UPDATE_COMMENT:
+            return state.filter(_ => _.id !== comment.id).concat([comment])
         default:
             return state
     }
