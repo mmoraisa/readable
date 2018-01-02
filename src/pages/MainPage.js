@@ -24,6 +24,18 @@ class MainPage extends Component{
         deletePost(postId)
     }
 
+    componentWillMount(){
+        const { match, fetchPosts, fetchCategoryPosts, fetchCategories } = this.props
+        
+        if(match.url === '/'){
+            fetchPosts()
+        } else{
+            fetchCategoryPosts(match.params.categoryPath)
+        }
+
+        fetchCategories()
+    }
+
     componentWillReceiveProps = nextProps => {
         const { match, fetchPosts, fetchCategoryPosts, fetchCategories } = this.props
         const categoryPath = nextProps.match.params['categoryPath']
