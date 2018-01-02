@@ -11,7 +11,7 @@ const CategoryList = props => {
     return (
         <div className="categories-list">
             {showingCategories.map(category => (
-                <Link to={category.path}>{category.name}</Link>
+                <Link key={category.path} to={category.path}>{category.name}</Link>
             ))}
         </div>
     )

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { votePost } from '../actions/postsActions'
 import { connect } from 'react-redux'
-import history from '../history';
+
+import { withRouter } from 'react-router'
 
 class Post extends Component{
 
     redirectToPost = postId => {
-        history.push(`/post/${postId}`)
+        this.props.history.push(`/post/${postId}`)
     }
 
     render () {
@@ -36,6 +37,6 @@ const mapStateToProps = ({ posts }) => {
     return { posts }
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     votePost
-})(Post);
+})(Post));

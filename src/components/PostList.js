@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import Post from './Post'
 import './PostList.css'
+import { withRouter } from 'react-router'
 
 import sortBy from 'sort-by'
-
-import history from '../history';
 
 class PostList extends Component{
 
@@ -28,7 +27,7 @@ class PostList extends Component{
     }
 
     createPost = () => {
-        history.push('/create/post')
+        this.props.history.push('/create/post')
     }
 
     render () {
@@ -58,4 +57,4 @@ class PostList extends Component{
     }
 }
 
-export default PostList
+export default withRouter(PostList)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './PostDetails.css'
 
-import history from '../history';
+import { withRouter } from 'react-router'
 
 import timestampToDayMonthYear from '../utils/date.js'
 
@@ -62,12 +62,12 @@ class PostDetails extends Component{
     }
 
     redirectToPosts = () => {
-        history.push('/')
+        this.props.history.push('/')
     }
 
     redirectToEdit = () => {
         const { postId } = this.state
-        history.push(`/post/${postId}/edit`)
+        this.props.history.push(`/post/${postId}/edit`)
     }
 
     render () {
@@ -108,4 +108,4 @@ class PostDetails extends Component{
     }
 }
 
-export default PostDetails
+export default withRouter(PostDetails)

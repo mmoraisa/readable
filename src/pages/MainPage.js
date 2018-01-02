@@ -19,14 +19,17 @@ class MainPage extends Component{
         categories: PropTypes.array
     }
 
-    componentDidMount() {
+    componentWillReceiveProps = nextProps => {
         const { match, fetchPosts, fetchCategoryPosts, fetchCategories } = this.props
-        const categoryPath = match.params['categoryPath']
+        const categoryPath = nextProps.match.params['categoryPath']
 
-        if(!categoryPath)
+        if(match === nextProps.match) return false;
+        
+        if(nextProps.match.url === '/'){
             fetchPosts()
-        else
+        } else{
             fetchCategoryPosts(categoryPath)
+        }
 
         fetchCategories()
     }
