@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
-import Category from './Category'
+import React from 'react'
 import './CategoryList.css'
+import { Link } from 'react-router-dom'
 
-class CategoryList extends Component{
-    render () {
-        const { categories } = this.props
+const CategoryList = props => {
+    const { categories } = props
+    
+    const showingCategories = [{ name: 'all', path: '/' }]
+        .concat(categories.map(_ => { return { ..._, path: `/category/${_.path}` } }))
 
-        const showingCategories = [{ name: 'all', path: '/' }]
-            .concat(categories.map(_ => { return { ..._, path: `/category/${_.path}` } }))
-
-        return (
-            <div className="categories-list">
-                {showingCategories.map(category => (
-                    <Category key={category.path} category={category} />
-                ))}
-            </div>
-        )
-    }
+    return (
+        <div className="categories-list">
+            {showingCategories.map(category => (
+                <Link to={category.path}>{category.name}</Link>
+            ))}
+        </div>
+    )
 }
 
 export default CategoryList
