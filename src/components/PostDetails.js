@@ -66,8 +66,8 @@ class PostDetails extends Component{
     }
 
     redirectToEdit = () => {
-        const { postId } = this.state
-        this.props.history.push(`/post/${postId}/edit`)
+        const { postId, postCategory } = this.state
+        this.props.history.push(`/${postCategory}/${postId}/edit`)
     }
 
     render () {

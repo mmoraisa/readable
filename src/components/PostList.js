@@ -30,6 +30,11 @@ class PostList extends Component{
         this.props.history.push('/create/post')
     }
 
+    callDeletePost = (postId,evt) => {
+        this.props.callDeletePost(postId)
+        evt.stopPropagation()
+    }
+
     render () {
         const { posts } = this.props
         const { selectedSortBy } = this.state
@@ -50,7 +55,7 @@ class PostList extends Component{
                     </button>
                 </div>
                 {sortedPosts.map(post => (
-                    <Post key={post.id} post={post}/>
+                    <Post key={post.id} post={post} callDeletePost={this.callDeletePost}/>
                 ))}
             </div>
         )

@@ -10,8 +10,8 @@ const Root = () => {
                 <Route exact path='/' component={MainPage}/>
                 <Route exact path='/category/:categoryPath' component={MainPage}/>
                 <Route exact path='/create/post' component={PostPage}/>
-                <Route exact path='/post/:postId' component={PostPage}/>
-                <Route exact path='/post/:postId/edit' component={PostPage}/>
+                <Route exact path='/:categoryPath/:postId' component={PostPage}/>
+                <Route exact path='/:categoryPath/:postId/edit' component={PostPage}/>
             </div>
         </BrowserRouter>
     )

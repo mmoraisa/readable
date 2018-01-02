@@ -14,6 +14,8 @@ function postsReducer(state = [], action) {
                     _.voteScore = post.voteScore
                 return _
             })
+        case ActionsTypes.DELETE_POST:
+            return state.filter(_ => _.id !== post.id)
         default:
             return state
     }

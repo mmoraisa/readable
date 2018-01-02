@@ -9,7 +9,7 @@
 }
 
 .post-list .post header .post-info{
-    width: calc(100% - 90px);
+    width: 100%;
     display: inline-block;
 }
 
@@ -27,6 +27,11 @@
 
 .post-list .post header .post-score{
     width: 80px;
+    float: right;
+}
+
+.post-list .post header .post-remove{
+    display: inline-block;
     float: right;
 }
 

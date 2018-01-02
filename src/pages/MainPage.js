@@ -7,7 +7,7 @@ import CategoryList from '../components/CategoryList'
 
 import '../../node_modules/font-awesome/css/font-awesome.min.css'
 
-import { fetchPosts, fetchCategoryPosts } from '../actions/postsActions'
+import { fetchPosts, fetchCategoryPosts, deletePost } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 
 import { connect } from 'react-redux'
@@ -17,6 +17,11 @@ class MainPage extends Component{
     static propTypes = {
         posts: PropTypes.array,
         categories: PropTypes.array
+    }
+
+    callDeletePost = postId => {
+        const { deletePost } = this.props
+        deletePost(postId)
     }
 
     componentWillReceiveProps = nextProps => {
@@ -41,12 +46,11 @@ class MainPage extends Component{
             <div className="main-page">
                 <h1>Readable</h1>
                 <CategoryList categories={categories}/>
-                <PostList posts={posts}/>
+                <PostList posts={posts} callDeletePost={this.callDeletePost}/>
             </div>
         )
     }
 }
-
 
 function mapStateToProps({ posts, categories }) {
     return {
@@ -58,5 +62,6 @@ function mapStateToProps({ posts, categories }) {
 export default withRouter(connect(mapStateToProps, {
     fetchPosts,
     fetchCategories,
-    fetchCategoryPosts
+    fetchCategoryPosts,
+    deletePost
 })(MainPage))

@@ -17,6 +17,8 @@ class PostPage extends Component{
     componentDidMount () {
         const { match, fetchPost, fetchComments, fetchCategories } = this.props
         
+        if(match.params.categoryPath === 'category') return false
+        
         fetchCategories()
 
         const postId = match.params['postId']
@@ -31,6 +33,8 @@ class PostPage extends Component{
         const { post, comments, match, updatePost, createPost, categories } = this.props
         const isEditPage = match.url.split('/').includes('edit') || match.path === '/create/post'
         const readOnly = !isEditPage
+
+        if(match.params.categoryPath === 'category') return false
     
         return (
             <div className="post-page">
