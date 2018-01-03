@@ -46,6 +46,11 @@
     float: right;
 }
 
+.post-list .post header .post-edit{
+    display: inline-block;
+    float: right;
+}
+
 .post-list .post header button{
     background: none;
     text-align: center;

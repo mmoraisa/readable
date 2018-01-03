@@ -8,6 +8,12 @@ class Post extends Component{
         this.props.history.push(`/${categoryPath}/${postId}`)
     }
 
+    callEditPost = evt => {
+        const { post } = this.props
+        this.props.history.push(`/${post.category}/${post.id}/edit`)
+        evt.stopPropagation()
+    }
+
     render () {
         const { post, votePost, callDeletePost } = this.props
 
@@ -19,6 +25,7 @@ class Post extends Component{
                         <h4 className="post-author">{post.author}</h4>
                     </div>
                     <button className="post-remove" onClick={evt => { callDeletePost(post.id,evt) }}><span className="fa fa-trash"></span></button>
+                    <button className="post-edit" onClick={evt => { this.callEditPost(evt) }}><span className="fa fa-edit"></span></button>
                     <div className="post-score">
                         <button onClick={evt => { votePost(post.id,'downVote',evt) }}><span className="fa fa-thumbs-o-down"></span></button>
                         <span className="post-vote-score">{post.voteScore}</span>
