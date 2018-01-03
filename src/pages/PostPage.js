@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { fetchPost, updatePost, createPost } from '../actions/postActions'
-import { deletePost } from '../actions/postsActions'
+import { deletePost, votePost } from '../actions/postsActions'
 import { fetchComments } from '../actions/commentsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 
@@ -31,7 +31,7 @@ class PostPage extends Component{
     }
     
     render () {
-        const { post, comments, match, updatePost, createPost, categories } = this.props
+        const { post, comments, match, updatePost, createPost, votePost, categories } = this.props
         const isEditPage = match.url.split('/').includes('edit') || match.path === '/create/post'
         const readOnly = !isEditPage
 
@@ -40,7 +40,7 @@ class PostPage extends Component{
         return (
             <div className="post-page">
                 <div className="post-info">
-                    <PostDetails post={post} match={match} categories={categories} readOnly={readOnly} updatePost={updatePost} createPost={createPost} deletePost={deletePost}/>
+                    <PostDetails post={post} match={match} categories={categories} readOnly={readOnly} updatePost={updatePost} createPost={createPost} deletePost={deletePost} votePost={votePost}/>
                     {!isEditPage && (<CommentList comments={comments} postId={post.id}/>)}
                 </div>
             </div>
@@ -58,5 +58,6 @@ export default withRouter(connect(mapStateToProps, {
     fetchComments,
     createPost,
     fetchCategories,
-    deletePost
+    deletePost,
+    votePost
 })(PostPage))

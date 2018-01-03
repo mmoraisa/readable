@@ -10,6 +10,8 @@ function postReducer(state = {}, action) {
             return post
         case ActionsTypes.CREATE_POST:
             return post
+        case ActionsTypes.VOTE_POST_GET_POST:
+            return post
         default:
             return state
     }

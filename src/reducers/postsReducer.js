@@ -2,7 +2,7 @@ import * as ActionsTypes from '../actions/types'
 
 function postsReducer(state = [], action) {
     const { posts, post, type } = action
-
+    
     switch(type){
         case ActionsTypes.FETCH_POSTS:
             return posts

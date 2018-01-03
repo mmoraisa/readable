@@ -91,7 +91,7 @@ class PostDetails extends Component{
     }
 
     render () {
-        const { post, readOnly, categories, match } = this.props
+        const { post, readOnly, categories, match, votePost } = this.props
         const { postId, postTitle, postAuthor, postBody, postCategory } = this.state
 
         return (
@@ -99,6 +99,11 @@ class PostDetails extends Component{
                 <button onClick={this.redirectToPosts} className="btn btn-back"><span className="fa fa-angle-left"></span>Back to posts</button>
                 {match.path.indexOf('edit') === -1 && match.path !== '/create/post' && (
                     <div className="post-controls">
+                        <div className="post-score">
+                            <button onClick={() => { votePost(post.id,'downVote',true) }}><span className="fa fa-thumbs-o-down"></span></button>
+                            <span className="post-vote-score">{post.voteScore}</span>
+                            <button onClick={() => { votePost(post.id,'upVote',true) }}><span className="fa fa-thumbs-o-up"></span></button>
+                        </div>
                         <button onClick={this.removePost} className="btn btn-remove"><span className="fa fa-trash"></span>Remove post</button>
                         <button onClick={() => { this.redirectToEdit(postId,postCategory) }} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>
                     </div>
@@ -113,7 +118,6 @@ class PostDetails extends Component{
                     readOnly && (
                         <div>
                             <div>Creation Date: {post.timestamp && timestampToDayMonthYear(post.timestamp)}</div>
-                            <div>Vote Score: {post.voteScore}</div>
                         </div>
                     )
                 }

@@ -8,6 +8,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const VOTE_POST = 'VOTE_POST';
+export const VOTE_POST_GET_POST = 'VOTE_POST_GET_POST';
 
 // Comments action types
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
