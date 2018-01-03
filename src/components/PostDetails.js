@@ -16,13 +16,23 @@ class PostDetails extends Component{
     }
 
     componentWillReceiveProps = props => {
-        this.setState({
-            postId: props.post.id,
-            postTitle: props.post.title,
-            postAuthor: props.post.author,
-            postBody: props.post.body,
-            postCategory: props.post.category
-        })
+        if(props.match.url !== '/create/post'){
+            this.setState({
+                postId: props.post.id,
+                postTitle: props.post.title,
+                postAuthor: props.post.author,
+                postBody: props.post.body,
+                postCategory: props.post.category
+            })
+        } else{
+            this.setState({
+                postId: '',
+                postTitle: '',
+                postAuthor: '',
+                postBody: '',
+                postCategory: ''
+            })
+        }
     }
     
     handleOnChangePostTitle = e => {
