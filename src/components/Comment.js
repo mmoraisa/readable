@@ -40,9 +40,19 @@ class Comment extends Component{
 
     componentDidMount = () => {
         const { edit } = this.props
+        let { comment } = this.props
+
+        if(comment === undefined){
+            comment = {
+                author: '',
+                body: ''
+            }
+        }
 
         this.setState({
-            edit
+            edit,
+            commentAuthor: comment.author,
+            commentBody: comment.body
         })
     }
     
