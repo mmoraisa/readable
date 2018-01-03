@@ -24,6 +24,7 @@ class Post extends Component{
                         <span className="post-vote-score">{post.voteScore}</span>
                         <button onClick={evt => { votePost(post.id,'upVote',evt) }}><span className="fa fa-thumbs-o-up"></span></button>
                     </div>
+                    <div className="post-comments">{post.commentCount} comments</div>
                 </header>
                 <p className="post-body">{post.body}</p>
             </div>

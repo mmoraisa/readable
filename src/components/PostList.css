@@ -30,6 +30,17 @@
     float: right;
 }
 
+.post-list .post header .post-comments{
+    display: inline-block;
+    float: right;
+    background-color: #b4c7c7;
+    font-size: 13px;
+    padding: 3px 6px;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
 .post-list .post header .post-remove{
     display: inline-block;
     float: right;
@@ -59,6 +70,7 @@
 .post-list .post .post-body{
     margin: 5px 0 0 0;
     font-size: .75em;
+    width: calc(100% - 210px);
 }
 
 .post-list .order-control{
