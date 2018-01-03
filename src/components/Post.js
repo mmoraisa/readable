@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import timestampToDayMonthYear from '../utils/date'
 import { withRouter } from 'react-router'
 
 class Post extends Component{
@@ -31,7 +31,8 @@ class Post extends Component{
                         <span className="post-vote-score">{post.voteScore}</span>
                         <button onClick={evt => { votePost(post.id,'upVote',evt) }}><span className="fa fa-thumbs-o-up"></span></button>
                     </div>
-                    <div className="post-comments">{post.commentCount} comments</div>
+                    <div className="post-comments"><span className="fa fa-comments"></span>{post.commentCount}</div>
+                    <div className="post-date"><span className="fa fa-calendar"></span>{timestampToDayMonthYear(post.timestamp)}</div>
                 </header>
                 <p className="post-body">{post.body}</p>
             </div>
