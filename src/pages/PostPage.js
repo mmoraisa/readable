@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { fetchPost, updatePost, createPost } from '../actions/postActions'
+import { deletePost } from '../actions/postsActions'
 import { fetchComments } from '../actions/commentsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 
@@ -39,7 +40,7 @@ class PostPage extends Component{
         return (
             <div className="post-page">
                 <div className="post-info">
-                    <PostDetails post={post} match={match} categories={categories} readOnly={readOnly} updatePost={updatePost} createPost={createPost}/>
+                    <PostDetails post={post} match={match} categories={categories} readOnly={readOnly} updatePost={updatePost} createPost={createPost} deletePost={deletePost}/>
                     {!isEditPage && (<CommentList comments={comments} postId={post.id}/>)}
                 </div>
             </div>
@@ -56,5 +57,6 @@ export default withRouter(connect(mapStateToProps, {
     updatePost,
     fetchComments,
     createPost,
-    fetchCategories
+    fetchCategories,
+    deletePost
 })(PostPage))

@@ -65,22 +65,32 @@ class PostDetails extends Component{
         this.props.history.push('/')
     }
 
-    redirectToEdit = () => {
-        const { postId, postCategory } = this.state
+    redirectToEdit = (postId, postCategory) => {
         this.props.history.push(`/${postCategory}/${postId}/edit`)
+    }
+
+    removePost = () => {
+        const { postId } = this.state
+        const { deletePost } = this.props
+        deletePost(postId)
     }
 
     render () {
         const { post, readOnly, categories, match } = this.props
-        const { postTitle, postAuthor, postBody, postCategory } = this.state
+        const { postId, postTitle, postAuthor, postBody, postCategory } = this.state
 
         return (
             <div className="post-details">
                 <button onClick={this.redirectToPosts} className="btn btn-back"><span className="fa fa-angle-left"></span>Back to posts</button>
-                {match.path.indexOf('edit') === -1 && match.path !== '/create/post' && (<button onClick={this.redirectToEdit} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>)}
+                {match.path.indexOf('edit') === -1 && match.path !== '/create/post' && (
+                    <div className="post-controls">
+                        <button onClick={this.removePost} className="btn btn-remove"><span className="fa fa-trash"></span>Remove post</button>
+                        <button onClick={() => { this.redirectToEdit(postId,postCategory) }} className="btn btn-edit"><span className="fa fa-edit"></span>Edit post</button>
+                    </div>
+                )}
                 <header>
-                    <input name="post-title" type="text" placeholder="Title" defaultValue={postTitle} readOnly={readOnly} onChange={this.handleOnChangePostTitle} />
-                    <input name="post-author" type="text" placeholder="Post Author" defaultValue={postAuthor} readOnly={readOnly} onChange={this.handleOnChangePostAuthor} />
+                    <input name="post-title" type="text" placeholder="Title" value={postTitle} readOnly={readOnly} onChange={this.handleOnChangePostTitle} />
+                    <input name="post-author" type="text" placeholder="Post Author" value={postAuthor} readOnly={readOnly} onChange={this.handleOnChangePostAuthor} />
                 </header>
                 <hr/>
                 <textarea name="post-body" placeholder="Content" value={postBody} readOnly={readOnly} onChange={this.handleOnChangePostBody} />

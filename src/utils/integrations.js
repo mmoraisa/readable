@@ -1,6 +1,6 @@
 import guid from './guid.js'
 
-export const API = 'http://localhost:3001'
+export const API = 'http://localhost:3002'
 let token = localStorage.token
 
 if (!token)

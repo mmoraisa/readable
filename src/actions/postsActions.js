@@ -35,7 +35,7 @@ export const votePost = (postId, option) => {
 }
 
 export const deletePost = postId => {
-    return dispatch => {
+    return (dispatch) => {
         API.deletePost(postId).then(post => {
             dispatch({
                 type: ActionsTypes.DELETE_POST,

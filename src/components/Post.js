@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { votePost } from '../actions/postsActions'
-import { connect } from 'react-redux'
 
 import { withRouter } from 'react-router'
 
@@ -22,9 +20,9 @@ class Post extends Component{
                     </div>
                     <button className="post-remove" onClick={evt => { callDeletePost(post.id,evt) }}><span className="fa fa-trash"></span></button>
                     <div className="post-score">
-                        <button onClick={() => { votePost(post.id,'downVote') }}><span className="fa fa-thumbs-o-down"></span></button>
+                        <button onClick={evt => { votePost(post.id,'downVote',evt) }}><span className="fa fa-thumbs-o-down"></span></button>
                         <span className="post-vote-score">{post.voteScore}</span>
-                        <button onClick={() => { votePost(post.id,'upVote') }}><span className="fa fa-thumbs-o-up"></span></button>
+                        <button onClick={evt => { votePost(post.id,'upVote',evt) }}><span className="fa fa-thumbs-o-up"></span></button>
                     </div>
                 </header>
                 <p className="post-body">{post.body}</p>
@@ -33,10 +31,4 @@ class Post extends Component{
     }
 }
 
-const mapStateToProps = ({ posts }) => {
-    return { posts }
-}
-
-export default withRouter(connect(mapStateToProps, {
-    votePost
-})(Post));
+export default withRouter(Post)

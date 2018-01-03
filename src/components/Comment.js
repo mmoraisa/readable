@@ -24,14 +24,18 @@ class Comment extends Component{
                 if(commentAuthor.length > 0){
                     callCreateComment(commentAuthor,commentBody)
                     endNewComment()
+                    this.setState(initialState)
+                } else{
+                    alert('You need to fill the author\'s name to proceed.')
                 }
             }
             else{
                 callSaveComment(comment.id,commentBody)
+                this.setState(initialState)
             }
+        } else{
+            alert('You need to fill the comment\'s body name to proceed.')
         }
-
-        this.setState(initialState)
     }
 
     componentDidMount = () => {
@@ -69,7 +73,7 @@ class Comment extends Component{
                 <div className="body">
                     <textarea defaultValue={comment.body} onChange={this.handleOnChangeCommentBody} disabled={!edit}></textarea>
                 </div>
-                <div className="author">by <input type="text" defaultValue={comment.author} onChange={this.handleOnChangeCommentAuthor} disabled={!edit}/></div>
+                <div className="author">by <input type="text" defaultValue={comment.author} onChange={this.handleOnChangeCommentAuthor} disabled={comment.id !== undefined}/></div>
                 { comment.id && 
                 (
                     <div className="controls">

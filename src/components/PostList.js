@@ -35,6 +35,12 @@ class PostList extends Component{
         evt.stopPropagation()
     }
 
+    votePost = (postId,option,evt) => {
+        const { callVotePost } = this.props
+        callVotePost(postId,option)
+        evt.stopPropagation()
+    }
+
     render () {
         const { posts } = this.props
         const { selectedSortBy } = this.state
@@ -55,7 +61,7 @@ class PostList extends Component{
                     </button>
                 </div>
                 {sortedPosts.map(post => (
-                    <Post key={post.id} post={post} callDeletePost={this.callDeletePost}/>
+                    <Post key={post.id} post={post} callDeletePost={this.callDeletePost} votePost={this.votePost}/>
                 ))}
             </div>
         )

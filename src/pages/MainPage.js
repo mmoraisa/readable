@@ -7,7 +7,7 @@ import CategoryList from '../components/CategoryList'
 
 import '../../node_modules/font-awesome/css/font-awesome.min.css'
 
-import { fetchPosts, fetchCategoryPosts, deletePost } from '../actions/postsActions'
+import { fetchPosts, fetchCategoryPosts, deletePost, votePost } from '../actions/postsActions'
 import { fetchCategories } from '../actions/categoriesActions'
 
 import { connect } from 'react-redux'
@@ -22,6 +22,11 @@ class MainPage extends Component{
     callDeletePost = postId => {
         const { deletePost } = this.props
         deletePost(postId)
+    }
+
+    callVotePost = (postId,option) => {
+        const { votePost } = this.props
+        votePost(postId,option)
     }
 
     componentWillMount(){
@@ -58,7 +63,7 @@ class MainPage extends Component{
             <div className="main-page">
                 <h1>Readable</h1>
                 <CategoryList categories={categories}/>
-                <PostList posts={posts} callDeletePost={this.callDeletePost}/>
+                <PostList posts={posts} callDeletePost={this.callDeletePost} callVotePost={this.callVotePost}/>
             </div>
         )
     }
@@ -75,5 +80,6 @@ export default withRouter(connect(mapStateToProps, {
     fetchPosts,
     fetchCategories,
     fetchCategoryPosts,
-    deletePost
+    deletePost,
+    votePost
 })(MainPage))
