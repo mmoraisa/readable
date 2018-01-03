@@ -6,7 +6,7 @@ const CategoryList = props => {
     const { categories } = props
     
     const showingCategories = [{ name: 'all', path: '/' }]
-        .concat(categories.map(_ => { return { ..._, path: `/category/${_.path}` } }))
+        .concat(categories.map(_ => { return { ..._, path: `/${_.path}` } }))
 
     return (
         <div className="categories-list">
