@@ -61,23 +61,28 @@ class PostDetails extends Component{
 
     savePost = () => {
         const { postId, postTitle, postAuthor, postBody, postCategory } = this.state
-        
-        if(postTitle.length == 0){
+
+        if(postTitle.length === 0){
             alert('You need to fill the post\'s title to save.')
             return false
         }
 
-        if(postAuthor.length == 0){
+        if(postAuthor.length === 0){
             alert('You need to fill the post\'s author to save.')
             return false
         }
 
-        if(postBody.length == 0){
+        if(postBody.length === 0){
             alert('You need to fill the post\'s body to save.')
             return false
         }
 
-        if(postId === undefined){
+        if(postCategory.length === 0){
+            alert('You need to select the post\'s category to save.')
+            return false
+        }
+
+        if(postId === ''){
             this.props.createPost(postTitle, postAuthor, postBody, postCategory);
         } else{
             this.props.updatePost(postId, postTitle, postAuthor, postBody, postCategory)

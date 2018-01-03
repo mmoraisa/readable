@@ -31,7 +31,7 @@ class PostPage extends Component{
     }
     
     render () {
-        const { post, comments, match, updatePost, createPost, votePost, categories } = this.props
+        const { post, comments, match, updatePost, createPost, votePost, deletePost, categories } = this.props
         const isEditPage = match.url.split('/').includes('edit') || match.path === '/create/post'
         const readOnly = !isEditPage
 
